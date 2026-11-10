@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#efede7">
+  <meta name="description" content="Ноябрьская дорога, случайная встреча и любовь, которую невозможно вернуть. Иллюстрированный рассказ «Там, где мы остались».">
+  <title>Там, где мы остались — между строк</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%233e4b40'/%3E%3Cpath d='M9 11h9l2 3 2-3h9v19h-9l-2 2-2-2H9Z' fill='none' stroke='%23f4f1e8' stroke-width='2'/%3E%3Cpath d='M20 14v18' stroke='%23f4f1e8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="style.css">
+  <script>try{const s=JSON.parse(localStorage.getItem('between-lines')||'{}');if(s.theme)document.documentElement.dataset.theme=s.theme}catch(e){}</script>
+  <script src="script.js" defer></script>
+  <script src="reader.js" defer></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h5c2 0 4 1 4 3 0-2 2-3 4-3h5v15h-5c-2 0-4 1-4 2 0-1-2-2-4-2H3Z"/><path d="M12 7v14"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 13.5A9 9 0 0 1 10.5 3a9 9 0 1 0 10 10.5Z"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6M8 12h13"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m10 6 6 6-6 6M3 12h13"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Между строк — главная"><svg><use href="#i-book"/></svg><span>между строк<span class="brand-dot">.</span></span></a>
+    <div class="header-note"><span class="small-dot"></span> одна история. немного тишины.</div>
+    <nav class="reading-tools" aria-label="Настройки чтения">
+      <button class="tool-button contents-toggle" id="contents-button" aria-label="Открыть содержание" aria-haspopup="dialog"><svg><use href="#i-list"/></svg><span>Содержание</span></button>
+      <span class="tool-divider"></span>
+      <div class="settings-anchor">
+        <button class="tool-button type-button" id="type-button" aria-label="Размер текста" aria-expanded="false" aria-controls="type-panel">Аа</button>
+        <div class="type-panel" id="type-panel" hidden>
+          <span class="settings-label">Размер текста</span>
+          <div class="font-controls"><button id="font-smaller" aria-label="Уменьшить шрифт">А−</button><span id="font-size">19</span><button id="font-larger" aria-label="Увеличить шрифт">А+</button></div>
+          <label class="settings-label" for="line-spacing">Межстрочный интервал</label>
+          <select id="line-spacing"><option value="1.55">Компактный</option><option value="1.8" selected>Обычный</option><option value="2.05">Свободный</option></select>
+          <button class="reset-font" id="font-reset">По умолчанию</button>
+        </div>
+      </div>
+      <button class="tool-button theme-button" id="theme-button" aria-label="Включить тёмную тему"><svg><use href="#i-moon"/></svg></button>
+      <button class="tool-button focus-button" id="focus-button" aria-label="Режим погружения" aria-pressed="false"><svg><use href="#i-expand"/></svg></button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="intro book-cover" id="intro" aria-labelledby="intro-title">
+      <h1 id="intro-title" class="sr-only">Там, где мы остались — обложка книги</h1>
+      <div class="cover-art"><!-- Замените assets/cover.jpg своей обложкой. Название и оформление могут быть прямо на изображении. -->
+        <img id="book-cover" src="assets/cover.jpg" alt="Обложка книги «Там, где мы остались»" fetchpriority="high" decoding="async">
+      </div>
+      <div class="cover-actions"><button id="start-reading" class="start-reading"><span>Начать читать</span><svg aria-hidden="true"><use href="#i-right"/></svg></button><span class="intro-meta" id="intro-meta">Короткий рассказ · 10 ноября 2026 года</span></div>
+    </section>
+    <div id="reader" hidden>
+    <div class="book-heading"><div><span class="eyebrow">КОРОТКИЙ РАССКАЗ</span><span class="heading-separator">/</span><span class="reading-time" id="reading-time">5 минут наедине с историей</span></div><span class="edition">ЦИФРОВАЯ КНИГА № 001</span></div>
+    <section class="book" id="book" aria-label="Книга «Там, где мы остались»">
+      <aside class="visual-page" id="visual-page">
+        <img class="cover-photo" id="cover-photo" src="assets/road.jpg" alt="Алиса на обочине заснеженной ночной трассы" decoding="async" fetchpriority="high">
+        <div class="photo-shade"></div>
+        <div class="scene-caption"><span id="scene-number">СЦЕНА 01</span><p id="scene-caption">Встреча</p></div>
+      </aside>
+      <div class="reading-page" id="reading-page">
+        <div class="page-running-head"><span>ТАМ, ГДЕ МЫ ОСТАЛИСЬ</span><span id="page-fraction">01 / 14</span></div>
+        <article class="story" id="story" tabindex="-1"></article>
+        <div class="page-footer"><span class="page-ornament">· &nbsp; ✦ &nbsp; ·</span><span class="folio" id="folio">1</span></div>
+      </div>
+      <div class="book-spine" aria-hidden="true"></div>
+      <div id="turn-layer" class="turn-layer" aria-hidden="true"></div>
+    </section>
+
+    <nav class="book-navigation" id="book-navigation" aria-label="Перелистывание страниц">
+      <button class="page-nav previous" id="previous" disabled><svg><use href="#i-left"/></svg><span>Назад</span></button>
+      <div class="reading-progress"><div class="progress-label"><span id="progress-caption">Начало истории</span><span id="progress-count">1 из 14</span></div><label class="sr-only" for="page-slider">Перейти к странице</label><input id="page-slider" class="progress-slider" type="range" min="1" max="14" value="1" step="1"><div class="keyboard-hint"><span>←</span><span>→</span> чтобы перелистнуть <span class="mobile-hint">Листайте кнопками или смахните влево</span></div></div>
+      <button class="page-nav next" id="next"><span>Следующая страница</span><svg><use href="#i-right"/></svg></button>
+    </nav>
+    <footer class="site-footer"><span><span class="small-dot"></span> Ваше место в истории сохранится</span><span>Не спешите. Эта история подождёт.</span></footer>
+    <p class="demo-note">10 ноября 2026 года · На телефоне можно тянуть страницу за край.</p>
+    </div>
+  </main>
+  <button id="exit-focus" class="exit-focus" hidden><svg><use href="#i-close"/></svg>Выйти из погружения</button>
+  <dialog id="contents-dialog" class="contents-dialog" aria-labelledby="contents-title"><div class="dialog-top"><span class="eyebrow">ВАША ИСТОРИЯ</span><button class="tool-button" id="close-contents" aria-label="Закрыть содержание"><svg><use href="#i-close"/></svg></button></div><h2 id="contents-title">Там, где мы остались</h2><p class="dialog-description">Пять частей одной истории.<br>О любви, памяти и последней встрече.</p><ol id="chapter-list"></ol><div class="dialog-foot"><svg><use href="#i-book"/></svg> Читайте в своём ритме</div></dialog>
+  <div class="sr-only" role="status" aria-live="polite" id="announcement"></div>
+</body>
+</html>
